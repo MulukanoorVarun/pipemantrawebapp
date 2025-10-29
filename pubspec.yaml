@@ -55,8 +55,6 @@ dependencies:
   image_picker: ^1.1.2
   mime: ^2.0.0
   dotted_border: ^2.0.0
-  flutter_pdfview: ^1.4.1+1
-  path_provider: ^2.1.5
   image: ^4.5.4
   camera: ^0.11.2
   geolocator: ^9.0.1
@@ -66,6 +64,16 @@ dependencies:
   flutter_paypal_payment: ^1.0.8
   flutter_inappwebview: ^6.1.5
   photo_view: ^0.15.0
+  firebase_core: ^4.0.0
+  firebase_messaging: ^16.0.0
+  flutter_local_notifications: ^19.3.1
+  flutter_pdfview: ^1.4.1+1
+  path_provider: ^2.1.5
+  share_plus: ^11.1.0
+  dotted_line: ^3.2.3
+  socket_io_client: ^3.1.2
+  flutter_staggered_grid_view: ^0.7.0
+  firebase_crashlytics: ^5.0.1
 
 
 dev_dependencies:

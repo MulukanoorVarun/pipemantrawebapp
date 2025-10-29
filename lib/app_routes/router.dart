@@ -1,6 +1,7 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import '../presentation/screens/Splash.dart';
+
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
   routes: [

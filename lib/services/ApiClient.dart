@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:mentivisor/utils/AppLogger.dart';
 import '../core/network/api_config.dart';
 import '../core/network/mentee_endpoints.dart';
-import '../utils/CrashlyticsDioInterceptor.dart';
+import '../crashlytics/CrashlyticsDioInterceptor.dart';
+import '../utils/AppLogger.dart';
 import '../utils/constants.dart';
 import 'AuthService.dart';
 
@@ -22,22 +22,6 @@ class ApiClient {
 
   static const List<String> _unauthenticatedEndpoints = [
     '/api/user-login',
-    '/api/registration-step-1',
-    '/api/registration-verify-step-2',
-    '/api/final-registration',
-    '/api/campuses',
-    '/api/years',
-    '/api/banners',
-    '/api/study-zone/tags',
-    '/api/study-zone/top-downloads',
-    '/api/guest-list-ecc',
-    '/api/community-zone-post-without-login',
-    '/api/top-mentors',
-    '/api/tags',
-    '/api/forget-password',
-    '/api/verify-otp',
-    '/api/reset-password',
-    '/api/upload-file',
   ];
 
   static void setupInterceptors() {
