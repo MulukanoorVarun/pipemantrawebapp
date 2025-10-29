@@ -1,9 +1,8 @@
+import 'dart:math' as math;
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:go_router/go_router.dart';
-
-import '../../services/AuthService.dart';
+import 'package:pipemantra/utils/color_constants.dart';
+import 'package:pipemantra/utils/media_query_helper.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,145 +13,76 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
-  late AnimationController _progressController;
+  late AnimationController _rotationController;
+  late Animation<double> _rotationAnimation;
+  bool _showText = false;
+
   @override
   void initState() {
     super.initState();
-    _progressController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 2))
-          ..forward().whenComplete(() async {
-            final token = await AuthService.getAccessToken();
-            final role = await AuthService.getRole();
-            if (token == null || token.isEmpty) {
-              context.pushReplacement('/dashboard');
-            } else {
-              // if (role == "Both") {
-              //   context.pushReplacement('/selected_screen');
-              // } else
 
-              context.pushReplacement('/dashboard');
-            }
-          });
+    // Rotation controller
+    _rotationController = AnimationController(
+      vsync: this,
+      duration:  Duration(milliseconds: 700),
+    );
+
+    // Animate 0° → 180°
+    _rotationAnimation = Tween<double>(begin: 0, end: math.pi).animate(
+      CurvedAnimation(parent: _rotationController, curve: Curves.easeInOut),
+    );
+
+    // Start rotation
+    _rotationController.forward().whenComplete(() async {
+      setState(() => _showText = true);
+
+      // 👇 Optional navigation delay
+      // await Future.delayed(const Duration(seconds: 2));
+      // context.pushReplacement('/dashboard');
+    });
   }
 
   @override
   void dispose() {
-    _progressController.dispose();
+    _rotationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFF8B5CF6), Color(0xFF2563EB)],
-          ),
-        ),
-        child: Stack(
+      backgroundColor: primarycolor,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Positioned(top: 100, left: 50, child: _buildAnimatedCircle(80)),
-            Positioned(bottom: 120, right: 40, child: _buildAnimatedCircle(60)),
-            Positioned(
-              top: MediaQuery.of(context).size.height * 0.35,
-              left: 0,
-              right: 0,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ElasticIn(
-                    child: Container(
-                      padding: const EdgeInsets.all(18),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Icon(
-                        Icons.check_circle,
-                        color: Color(0xFF8B5CF6),
-                        size: 48,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  FadeInUp(
-                    duration: const Duration(milliseconds: 600),
-                    child: const Text(
-                      'Mentivisor',
-                      style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontFamily: 'segeo',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  FadeInUp(
-                    delay: const Duration(milliseconds: 400),
-                    child: const Text(
-                      'The College Ecosystem In Your Hands',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.white70,
-                        fontFamily: 'segeo',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  FadeIn(
-                    delay: const Duration(milliseconds: 1000),
-                    child: AnimatedBuilder(
-                      animation: _progressController,
-                      builder: (context, child) {
-                        return Container(
-                          height: 4,
-                          width: 150,
-                          decoration: BoxDecoration(
-                            color: Colors.white30,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          alignment: Alignment.centerLeft,
-                          child: FractionallySizedBox(
-                            widthFactor: _progressController.value,
-                            child: Container(
-                              height: 4,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
+            // 🔄 Rotating logo
+            AnimatedBuilder(
+              animation: _rotationAnimation,
+              builder: (context, child) {
+                return Transform.rotate(
+                  angle: _rotationAnimation.value,
+                  child: child,
+                );
+              },
+              child: Image.asset(width: SizeConfig.screenWidth*0.8,height: SizeConfig.screenHeight*0.25,
+                "assets/logo/pipe-m-logo.png",
               ),
             ),
+            if (_showText)
+              FadeIn(
+                duration: const Duration(milliseconds: 650),
+                child: Text(
+                  "Pipemantra",
+                  style: TextStyle(
+                    color: textTittleColor,
+                    fontSize: 48,
+                    fontFamily: "Orbitron",
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAnimatedCircle(double size) {
-    return Animate(
-      effects: [
-        FadeEffect(duration: 1200.ms),
-        ScaleEffect(duration: 1800.ms),
-      ],
-      child: Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white.withOpacity(0.06),
         ),
       ),
     );

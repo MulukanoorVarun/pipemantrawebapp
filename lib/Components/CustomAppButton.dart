@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../utils/color_constants.dart';
 
-class CustomAppButton1 extends StatelessWidget {
+class CustomAppButton extends StatelessWidget {
   final String text;
   final Color? textcolor;
   final double? width;
@@ -17,7 +17,7 @@ class CustomAppButton1 extends StatelessWidget {
   final bool isLoading;
   final int? radius;
 
-  const CustomAppButton1({
+  const CustomAppButton({
     Key? key,
     required this.text,
     required this.onPlusTap,
@@ -50,43 +50,37 @@ class CustomAppButton1 extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius.toDouble()),
           ),
         ),
-        child: Ink(
-          decoration: BoxDecoration(
-            gradient: kCommonGradient,
-            borderRadius: BorderRadius.circular(borderRadius.toDouble()),
-          ),
-          child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (isLoading)
-                  const SizedBox(
-                    height: 24,
-                    width: 24,
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                      strokeWidth: 1.5,
-                    ),
-                  )
-                else
-                  Text(
-                    text,
-                    style: TextStyle(
-                      color: textColor,
-                      fontFamily: 'segeo',
-                      fontSize: textSize??16,
-                      fontWeight: FontWeight.w600,
-                    ),
+        child: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (isLoading)
+                const SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 1.5,
                   ),
-                if (!isLoading && icon != null) ...[
-                  const SizedBox(width: 8),
-                  Icon(icon, color: textColor, size: 18),
-                ],
+                )
+              else
+                Text(
+                  text,
+                  style: TextStyle(
+                    color: textColor,
+                    fontFamily: 'segeo',
+                    fontSize: textSize??16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              if (!isLoading && icon != null) ...[
+                const SizedBox(width: 8),
+                Icon(icon, color: textColor, size: 18),
               ],
-            ),
+            ],
           ),
         ),
       ),
@@ -151,22 +145,16 @@ class CustomOutlinedButton extends StatelessWidget {
     );
 
     // Outer gradient -> inner white = gradient outline effect
-    Widget button = DecoratedBox(
-      decoration: BoxDecoration(
-        gradient: kCommonGradient,
-        borderRadius: borderRadius,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(1), // outline thickness
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: borderRadius,
-          ),
-          child: Padding(
-            padding: height == null ? padding : EdgeInsets.zero,
-            child: Center(child: content),
-          ),
+    Widget button = Padding(
+      padding: const EdgeInsets.all(1), // outline thickness
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: borderRadius,
+        ),
+        child: Padding(
+          padding: height == null ? padding : EdgeInsets.zero,
+          child: Center(child: content),
         ),
       ),
     );
@@ -188,92 +176,6 @@ class CustomOutlinedButton extends StatelessWidget {
     );
   }
 }
-
-
-class CustomOutlinedButton1 extends StatelessWidget {
-  final String text;
-  final Color? textColor;
-  final double? width;
-  final double? height;
-  final VoidCallback? onTap;
-  final IconData? icon;
-  final bool isLoading;
-  final int? radius;
-  final Color? bgColor;
-  final Color? borderColor;
-
-  const CustomOutlinedButton1({
-    Key? key,
-    required this.text,
-    required this.onTap,
-    this.textColor,
-    this.width,
-    this.height,
-    this.icon,
-    this.isLoading = false,
-    this.radius,
-    this.bgColor,
-    this.borderColor,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final double buttonWidth = width ?? MediaQuery.of(context).size.width;
-    final double buttonHeight = height ?? 48;
-    final int borderRadius = radius ?? 12;
-    final Color finalTextColor = textColor ?? const Color(0xFF6D6BFF);
-
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        gradient: kCommonGradient,
-        borderRadius: BorderRadius.circular(borderRadius.toDouble()),
-      ),
-      child: OutlinedButton(
-        onPressed: isLoading ? null : onTap,
-        style: OutlinedButton.styleFrom(visualDensity: VisualDensity.compact,padding: EdgeInsets.zero,
-          backgroundColor:bgColor?? Colors.white,
-          side: BorderSide(
-            color: borderColor ?? Color(0xFF7B7F8C),
-            width: 1.2,
-          ),
-          fixedSize: Size(buttonWidth, buttonHeight),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius.toDouble()),
-          ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (isLoading)
-               SizedBox(
-                height: 24,
-                width: 24,
-                child: CircularProgressIndicator(
-                  color: Color(0xFF6D6BFF),
-                  strokeWidth: 1.5,
-                ),
-              )
-            else
-              Text(
-                text,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: finalTextColor,
-                ),
-              ),
-            if (!isLoading && icon != null) ...[
-               SizedBox(width: 8),
-              Icon(icon, color: finalTextColor, size: 18),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 
 class DashedOutlinedButton extends StatelessWidget {
   final double height;

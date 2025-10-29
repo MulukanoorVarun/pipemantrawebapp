@@ -56,7 +56,7 @@ class Nointernet extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CustomAppButton1(
+                CustomAppButton(
                   text: "Retry",
                   onPlusTap: () async {
                     final connectivityResult = await Connectivity()
