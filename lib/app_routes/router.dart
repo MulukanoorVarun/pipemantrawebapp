@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import '../presentation/screens/Splash.dart';
+import 'package:pipemantra/SplashScreen.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
@@ -8,7 +8,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/',
       pageBuilder: (context, state) {
-        return buildSlideTransitionPage(SplashScreen(), state);
+        return buildSlideTransitionPage(Splash(), state);
       },
     ),
 

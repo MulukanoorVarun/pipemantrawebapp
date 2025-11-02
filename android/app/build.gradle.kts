@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    namespace = "com.example.pipemantra"
+    namespace = "com.pipemantra.android"
     compileSdk = 35 // ✅ Updated to match plugin requirements
     ndkVersion = "27.0.12077973" // ✅ Explicit NDK version
 
     defaultConfig {
-        applicationId = "com.example.pipemantra"
+        applicationId = "com.pipemantra.android"
         minSdk = 28
         targetSdk = 35 // ✅ Explicitly match compileSdk (safe and clean)
         versionCode = flutter.versionCode
@@ -28,10 +28,19 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
+    signingConfigs {
+        create("release") {
+            keyAlias = "upload"
+            keyPassword = "pipemantra"
+            storePassword = "pipemantra"
+            storeFile = file("D:\\pipematra\\android\\app\\upload-keystore.jks")
+        }
+    }
+
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
             isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

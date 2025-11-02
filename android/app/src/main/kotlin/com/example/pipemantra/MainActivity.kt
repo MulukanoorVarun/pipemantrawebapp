@@ -1,4 +1,4 @@
-package com.example.pipemantra
+package com.pipemantra.android
 
 import io.flutter.embedding.android.FlutterActivity
 

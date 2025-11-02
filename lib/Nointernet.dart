@@ -23,7 +23,7 @@ class Nointernet extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
-                    color:  Color(0xFF96D968),
+                    color:Colors.white,
                     fontFamily: "lexend",
                   ),
                   children: [
@@ -32,7 +32,7 @@ class Nointernet extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
-                        color: Color(0xffFED700),
+                        color:Colors.white,
                         fontFamily: "lexend",
                       ),
                     ),
@@ -78,12 +78,12 @@ class Nointernet extends StatelessWidget {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:  Color(0xffFED700),
+                    backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text("Retry",style: TextStyle(color: Colors.white),),
+                  child: Text("Retry",style: TextStyle(color: Color(0xff001B36)),),
                 ),
               ),
 
