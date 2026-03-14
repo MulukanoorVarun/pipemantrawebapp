@@ -23,7 +23,7 @@ class Nointernet extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
-                    color:Colors.white,
+                    color: Colors.white,
                     fontFamily: "lexend",
                   ),
                   children: [
@@ -32,7 +32,7 @@ class Nointernet extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
-                        color:Colors.white,
+                        color: Colors.white,
                         fontFamily: "lexend",
                       ),
                     ),
@@ -55,11 +55,15 @@ class Nointernet extends StatelessWidget {
                 height: 48,
                 child: ElevatedButton(
                   onPressed: () async {
-                    final connectivityResult = await Connectivity().checkConnectivity();
+                    final connectivityResult = await Connectivity()
+                        .checkConnectivity();
                     if (connectivityResult != ConnectivityResult.none) {
                       try {
-                        final result = await InternetAddress.lookup('google.com');
-                        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+                        final result = await InternetAddress.lookup(
+                          'google.com',
+                        );
+                        if (result.isNotEmpty &&
+                            result[0].rawAddress.isNotEmpty) {
                           if (context.mounted) Navigator.pop(context);
                           return;
                         }
@@ -83,10 +87,12 @@ class Nointernet extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text("Retry",style: TextStyle(color: Color(0xff001B36)),),
+                  child: Text(
+                    "Retry",
+                    style: TextStyle(color: Color(0xff001B36)),
+                  ),
                 ),
               ),
-
             ],
           ),
         ),

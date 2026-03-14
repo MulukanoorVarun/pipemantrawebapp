@@ -20,7 +20,8 @@ class _WebERPState extends State<WebViewScreen> {
   final Completer<InAppWebViewController> _controller =
       Completer<InAppWebViewController>();
   bool isLoading = true;
-  String url = "https://pipemantra.com/";
+  // String url = "https://pipemantra.com/";
+  String url = "http://192.168.80.166:5174/";
   InAppWebViewController? webViewController;
   PullToRefreshController? pullToRefreshController;
   PullToRefreshSettings pullToRefreshSettings = PullToRefreshSettings();
@@ -77,11 +78,7 @@ class _WebERPState extends State<WebViewScreen> {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.topRight,
-              colors: [
-                Color(0xFF001f3f),
-                Color(0xFF003366),
-                Color(0xFF004080),
-              ],
+              colors: [Color(0xFF001f3f), Color(0xFF003366), Color(0xFF004080)],
               stops: [0.0, 0.5, 1.0],
             ),
           ),
@@ -246,9 +243,7 @@ class _WebERPState extends State<WebViewScreen> {
                         ),
                       ),
                       child: Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
+                        child: CircularProgressIndicator(color: Colors.white),
                       ),
                     ),
                 ],
