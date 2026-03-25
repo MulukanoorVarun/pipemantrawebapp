@@ -33,7 +33,7 @@ android {
             keyAlias = "upload"
             keyPassword = "pipemantra"
             storePassword = "pipemantra"
-            storeFile = file("D:\\pipematra\\android\\app\\upload-keystore.jks")
+            storeFile = file("C:\\Users\\varun\\Desktop\\VarunWorkSpace\\pipematra\\android\\app\\pipemantra-keystore.jks")
         }
     }
 
