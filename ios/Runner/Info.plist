@@ -41,6 +41,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Pipemantra needs camera access for file uploads.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Pipemantra needs photo library access for file uploads.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Pipemantra needs microphone access for audio and video recordings.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>

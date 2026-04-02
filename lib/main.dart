@@ -4,10 +4,13 @@ import 'package:pipemantra/state_injector.dart';
 import 'SplashScreen.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,
           scaffoldBackgroundColor: Color(0xff001B36),
-          dialogBackgroundColor: Colors.white,
+          // dialogBackgroundColor is set via dialogTheme below
           cardColor: Colors.white,
           searchBarTheme: const SearchBarThemeData(),
           tabBarTheme: const TabBarThemeData(),
@@ -54,8 +57,8 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.white,
           ),
           colorScheme: const ColorScheme.light(
-            background: Colors.white,
-          ).copyWith(background: Colors.white),
+            surface: Colors.white,
+          ),
         ),
         home: Splash(),
       ),
